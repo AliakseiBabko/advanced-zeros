@@ -17,4 +17,4 @@ For example:
 ```
 
 ### Important!
-Do not try to calculate factorial! First - you will not get exact answer on big numbers. Second - it could take several years to calculate factorial on big integers! Try to think up your awesome solution without such calculations. Good luck!
+Do not try to calculate factorial! First - you will not get exact answer on big numbers. Second - it could take several years to calculate factorial on big integers! Try to think up your awesome solution without such calculations. Good luck! 
