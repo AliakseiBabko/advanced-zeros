@@ -1,43 +1,23 @@
 module.exports = function getZerosCount(number, base) {
   // your implementation
-  let divisors = [];
-  let zeros = 0, finalDivisor, reminder;  
-  if (base < 3) {
-    finalDivisor = base
-  } else {
-    for (let i = 3; i < base; i += 2) {
-      if (base % i == 0) {
-        divisors.push(i);
-      }
+  let divisor = base;
+  let simpleNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127];
+  let zeros = 0, reminder, temp, counter = 0, i = 0;
+  while (simpleNumbers[i] <= base/2) {
+    if (base % simpleNumbers[i] == 0) {
+      divisor = simpleNumbers[i];
     }
+    i++;
   }
-  if (divisors.length == 0 && base == 2) {
-    finalDivisor = 2;
+ let pow = divisor;
+  while (number >= pow) {
+    zeros += Math.floor(number / pow);
+    pow *= divisor;
   }
-  else if ((divisors.length == 0) && (base % 2)) {
-    finalDivisor = base;
+  temp = base;
+  while (temp % divisor == 0) {
+    counter++;
+    temp /= divisor; 
   }
-  else if ((divisors.length == 0) && !(base % 2)) {
-    finalDivisor = base/2;
-  }
-  else if (divisors.length == 1) {
-    finalDivisor = divisors[0];
-  }
-  else if (divisors.length == 2) {
-    finalDivisor = divisors[1];
-  }
-  else if (divisors.length > 2) {
-    for (let i = divisors.length; i > 1; i--) {
-      if ((divisors[i] == divisors [0]*divisors[1]) || (divisors[i] = divisors [0]*divisors [0]) || (divisors[i] = divisors [1]*divisors [1])) {
-        divisors.pop();
-      };
-    }
-    finalDivisor = divisors[divisors.length-1];
-  }  
-  reminder = finalDivisor;
-  while (number >= reminder) {
-    zeros += Math.floor(number / reminder);
-    reminder *= finalDivisor;
-  }
-  return zeros;
+  return Math.floor(zeros/counter);
 }
