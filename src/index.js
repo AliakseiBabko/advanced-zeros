@@ -1,23 +1,31 @@
 module.exports = function getZerosCount(number, base) {
   // your implementation
-  let divisor = base;
+  let divisors = [], pow, zeros = [], temp, counter = 0, i = 0;
   let simpleNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127];
-  let zeros = 0, reminder, temp, counter = 0, i = 0;
   while (simpleNumbers[i] <= base/2) {
     if (base % simpleNumbers[i] == 0) {
-      divisor = simpleNumbers[i];
+      divisors.push(simpleNumbers[i]);
     }
     i++;
   }
- let pow = divisor;
+  if (divisors.length === 0) {
+    divisors.push(base);
+  }
+  for (let j = 0; j < divisors.length; j++) {
+  pow = divisors[j];
+  zeros.push(0);
   while (number >= pow) {
-    zeros += Math.floor(number / pow);
-    pow *= divisor;
+    zeros[j] += Math.floor(number / pow);
+    pow *= divisors[j];
   }
   temp = base;
-  while (temp % divisor == 0) {
+  counter = 0;
+  while (temp % divisors[j] == 0) {
     counter++;
-    temp /= divisor; 
+    temp /= divisors[j]; 
   }
-  return Math.floor(zeros/counter);
+  zeros[j] = Math.floor(zeros[j]/counter)
+ }
+ zeros.sort(function (a, b) {return a - b});
+ return zeros[0];
 }
